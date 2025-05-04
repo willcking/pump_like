@@ -1,7 +1,8 @@
 use anchor_lang::prelude::*;
 use crate::constants::meme::POOL_SEED;
 
-#[account]
+#[account(zero_copy(unsafe))]
+#[derive(Default, Debug)]
 pub struct PoolState {
     pub bump: u8,
 
