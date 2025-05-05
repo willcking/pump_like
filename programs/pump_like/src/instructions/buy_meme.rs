@@ -107,8 +107,11 @@ pub fn buy_meme(ctx: Context<BuyMeme>, amount: u64) -> Result<()> {
         )?;
     
     let meme_vault_amount = ctx.accounts.meme_vault.amount;
-    let out_meme_amount = calc_buy_meme_amount(
-        //todo
+    let out_meme_amount = calc::calc_buy_meme_amount(
+        TOTAL_SUPPLY_AMOUNT,
+        meme_vault_amount,
+        pool_sol_balance,
+        transfer_amount,
     );
     if out_meme_amount > meme_vault_amount {
         return err!(ErrorCode::InsufficientBalance);
@@ -129,7 +132,7 @@ pub fn buy_meme(ctx: Context<BuyMeme>, amount: u64) -> Result<()> {
     );
     transfer(cpi_context, out_meme_amount)?;
 
-    if sum_pool_sol_balance > constants::LISTINGS_MARKET_AMOUNT {
+    if sum_pool_sol_balance >= constants::LISTINGS_MARKET_AMOUNT {
         ctx.accounts
             .pool_state
             .to_account_info()
