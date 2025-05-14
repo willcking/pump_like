@@ -14,8 +14,8 @@ pub struct PoolConfig {
 
     pub fee_vault: Pubkey,
 
-    pub config_authority: Pubkey,
-    pub list_authority: Pubkey,
+    pub config_admin: Pubkey,
+    pub list_admin: Pubkey,
 }
 
 impl PoolConfig {
@@ -29,8 +29,8 @@ impl PoolConfig {
         create_meme_pool_fee: u64,
         list_to_raydium_fee: u64,
         fee_vault: Pubkey,
-        config_authority: Pubkey,
-        list_authority: Pubkey,
+        config_admin: Pubkey,
+        list_admin: Pubkey,
     ) -> Result<()> {
         self.bump = bump;
         self.swap_fee = swap_fee;
@@ -38,12 +38,38 @@ impl PoolConfig {
         self.create_meme_pool_fee = create_meme_pool_fee;
         self.list_to_raydium_fee = list_to_raydium_fee;
         self.fee_vault = fee_vault;
-        self.config_authority = config_authority;
-        self.list_authority = list_authority;
+        self.config_admin = config_admin;
+        self.list_admin = list_admin;
         Ok(())
     }
     
     pub fn get_list_to_ray_fee(&self) -> u64 {
         self.list_to_raydium_fee
     }
+
+    pub fn update_pool_config_admin(&mut self, config_admin: Pubkey) -> Result<()> {
+        self.config_admin = config_admin;
+        Ok(())
+    }
+
+    pub fn update_pool_config_list_admin(&mut self, list_admin: Pubkey) -> Result<()> {
+        self.list_admin = list_admin;
+        Ok(())
+    }
+
+    pub fn update_pool_config_swap_fee(&mut self, swap_fee: u16) -> Result<()> {
+        self.swap_fee = swap_fee;
+        Ok(())
+    }
+
+    pub fn update_pool_config_swap_fee_denominator(&mut self, swap_fee_denominator: u16) -> Result<()> {
+        self.swap_fee_denominator = swap_fee_denominator;
+        Ok(())
+    }
+
+    pub fn update_pool_config_create_meme_pool_fee(&mut self, create_meme_pool_fee: u64) -> Result<()> {
+        self.create_meme_pool_fee = create_meme_pool_fee;
+        Ok(())
+    }
+    
 }

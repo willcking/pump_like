@@ -50,13 +50,13 @@ pub fn init_pool_config(ctx: Context<InitPoolConfig>, params: PoolConfigParams) 
 
 
     emit!(CreatePoolConfigEvent {
-        config_authority: ctx.accounts.config_authority.to_account_info().key(),
-        pool_config: ctx.accounts.pool_config.to_account_info().key(),
-        swap_fee: pool_config_pramas.swap_fee,
-        swap_fee_denominator: pool_config_pramas.swap_fee_denominator,
-        creat_meme_fee: pool_config_pramas.creat_meme_fee,
-        list_to_ray_fee: pool_config_pramas.list_to_ray_fee,
-        independant_vault: pool_config_pramas.independant_vault,
+        config_admin: ctx.accounts.config_admin.to_account_info().key(),
+        list_admin: ctx.accounts.list_admin.to_account_info().key(),
+        swap_fee: params.swap_fee,
+        swap_fee_denominator: params.swap_fee_denominator,
+        creat_meme_fee: params.creat_meme_fee,
+        list_to_ray_fee: params.list_to_ray_fee,
+        independant_vault: params.independant_vault,
     });
     Ok(())
 }
