@@ -57,12 +57,13 @@ impl PoolConfig {
         Ok(())
     }
 
-    pub fn update_pool_config_swap_fee(&mut self, swap_fee: u16) -> Result<()> {
-        self.swap_fee = swap_fee;
+    pub fn update_pool_config_fee_vault(&mut self, fee_vault: Pubkey) -> Result<()> {
+        self.fee_vault = fee_vault;
         Ok(())
     }
 
-    pub fn update_pool_config_swap_fee_denominator(&mut self, swap_fee_denominator: u16) -> Result<()> {
+    pub fn update_pool_config_swap_fee(&mut self, swap_fee: u16, swap_fee_denominator: u16) -> Result<()> {
+        self.swap_fee = swap_fee;
         self.swap_fee_denominator = swap_fee_denominator;
         Ok(())
     }
@@ -71,5 +72,9 @@ impl PoolConfig {
         self.create_meme_pool_fee = create_meme_pool_fee;
         Ok(())
     }
-    
+
+    pub fn update_pool_config_list_to_raydium_fee(&mut self, list_to_raydium_fee: u64) -> Result<()> {
+        self.list_to_raydium_fee = list_to_raydium_fee;
+        Ok(())
+    }
 }

@@ -64,3 +64,34 @@ impl PoolState {
         self.rent_amount
     }
 }
+
+
+#[event]
+#[cfg_attr(feature = "client", derive(Debug))]
+pub struct PoolCreateEvent {
+    /// The address of the pool
+    #[index]
+    pub pool_state: Pubkey,
+    /// The address of the creator
+    #[index]
+    pub creator: Pubkey,
+    /// The first token of the pool by address sort order
+    #[index]
+    pub mem_mint: Pubkey,
+    /// Vault of meme token
+    #[index]
+    pub meme_vault: Pubkey,
+}
+
+#[event]
+#[cfg_attr(feature = "client", derive(Debug))]
+pub struct FrozenFundToAuthorityEvent {
+    #[index]
+    pub frozen_authority: Pubkey,
+    /// The address of the created pool
+    #[index]
+    pub meme_mint: Pubkey,
+
+    pub meme_amount: u64,
+    pub sol_amount: u64,
+}
